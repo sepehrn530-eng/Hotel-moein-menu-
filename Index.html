@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>کافی‌شاپ هتل معین | منو</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#171009;--surface:#251912;--ink:#f6ead7;--mute:#bba78d;--gold:#e0ab4a;--line:#3b2b1f;--tabtxt:#1b1209;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f7efe2;--surface:#fffaf0;--ink:#2b1a10;--mute:#7a634b;--gold:#a8710f;--line:#e4d3b8;--tabtxt:#fffaf0}}
+:root[data-theme="dark"]{--bg:#171009;--surface:#251912;--ink:#f6ead7;--mute:#bba78d;--gold:#e0ab4a;--line:#3b2b1f;--tabtxt:#1b1209}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.7}
+.hero{max-width:980px;margin:0 auto;padding:44px 22px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.hero h1{margin:0;font-family:"Lalezar","Vazirmatn",Tahoma,sans-serif;font-weight:400;line-height:1.05;color:var(--gold)}
+.hero h1 small{display:block;font-size:clamp(22px,5vw,34px);color:var(--ink)}
+.hero h1 span{display:block;font-size:clamp(64px,17vw,124px)}
+.hero p{margin:10px 0 0;color:var(--mute)}
+.hero svg{width:clamp(120px,26vw,220px);flex:none;color:var(--ink)}
+.st{animation:rise 3.2s ease-in-out infinite;transform-box:fill-box}
+.st+.st{animation-delay:1.1s}
+@keyframes rise{0%{opacity:0;transform:translateY(8px)}40%{opacity:.7}100%{opacity:0;transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.st{animation:none}}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{max-width:980px;margin:0 auto;padding:12px 22px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;font:600 15px "Vazirmatn",Tahoma,sans-serif;color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:7px 18px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--a);border-color:var(--a);color:var(--tabtxt)}
+.tabs button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:980px;margin:0 auto;padding:26px 22px 20px;min-height:60vh}
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+.head h2{margin:0;font-family:"Lalezar","Vazirmatn",Tahoma,sans-serif;font-weight:400;font-size:clamp(34px,7vw,48px);color:var(--a)}
+.head span{color:var(--mute);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.art{aspect-ratio:1;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--a) 32%,var(--surface)),var(--surface) 75%)}
+.art svg,.art img{width:84%;height:84%;object-fit:cover;color:var(--ink)}
+.art img{width:100%;height:100%}
+.meta{padding:10px 14px 14px}
+.meta b{display:block;font-weight:600;font-size:15px}
+.meta i{font-style:normal;font-weight:800;font-size:20px;color:var(--a)}
+#panel.in{animation:fade .35s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){#panel.in{animation:none}}
+footer{max-width:980px;margin:30px auto 0;padding:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;color:var(--mute);font-size:15px}
+footer a{color:var(--gold);text-decoration:none;font-weight:600;direction:ltr;unicode-bidi:embed}
+@media (max-width:520px){.hero{padding-top:30px}.grid{gap:10px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div>
+    <h1><small>کافی‌شاپ</small><span>هتل معین</span></h1>
+    <p>منوی نوشیدنی و دسر</p>
+  </div>
+  <div id="heroArt" aria-hidden="true"></div>
+</header>
+
+<div class="bar"><div class="tabs" id="tabs" role="tablist" aria-label="دسته‌بندی منو"></div></div>
+<main><div id="panel"></div></main>
+
+<footer>
+  <span>شماره داخلی کافی‌شاپ: <b style="color:var(--ink)">۱۸۵</b></span>
+  <span>اینستاگرام: <a href="https://instagram.com/coffee_hotelmoin" target="_blank" rel="noopener">coffee_hotelmoin</a></span>
+</footer>
+
+<script>
+// ---------- تصویرهای هر آیتم (SVG) ----------
+// برای استفاده از عکس واقعی، آدرس/داده‌ی عکس را به‌عنوان عنصر چهارم آیتم اضافه کنید.
+let g=0;
+const cup=(c,f,s=1)=>`<g transform="translate(50 72) scale(${s}) translate(-50 -72)"><ellipse cx="50" cy="84" rx="36" ry="6" fill="#cdbba3"/><path d="M24 44H72V60Q72 80 48 80Q24 80 24 60Z" fill="#f4eadb"/><path d="M72 50h5a7 7 0 0 1 0 14h-6" fill="none" stroke="#f4eadb" stroke-width="5"/><ellipse cx="48" cy="44" rx="24" ry="5.5" fill="${c}"/>${f?`<ellipse cx="48" cy="44" rx="15" ry="3.2" fill="${f}"/>`:''}<g fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2.5" stroke-linecap="round"><path class="st" d="M40 34q-5-7 0-12"/><path class="st" d="M54 34q-5-7 0-12"/></g></g>`;
+const TOP={
+mint:'<g fill="#4caf63"><ellipse cx="42" cy="24" rx="8" ry="4.5" transform="rotate(-25 42 24)"/><ellipse cx="56" cy="22" rx="8" ry="4.5" transform="rotate(20 56 22)"/></g>',
+lime:'<circle cx="72" cy="30" r="9" fill="#7cc24a"/><circle cx="72" cy="30" r="6" fill="#c9ee86"/><g fill="#4caf63"><ellipse cx="42" cy="24" rx="8" ry="4.5" transform="rotate(-25 42 24)"/></g>',
+orange:'<circle cx="72" cy="30" r="9" fill="#f59b1b"/><circle cx="72" cy="30" r="6" fill="#ffc15a"/>',
+scoop:'<circle cx="50" cy="24" r="13" fill="#fbf0d8"/><circle cx="44" cy="20" r="4" fill="#fff" fill-opacity=".6"/>',
+berries:'<circle cx="40" cy="25" r="5.5" fill="#d93a52"/><circle cx="52" cy="22" r="5.5" fill="#e8405e"/><circle cx="62" cy="26" r="5" fill="#7a2a8a"/>'};
+const glass=(a,b,t='')=>{const id='g'+(g++);const p='M28 26H72L66 86Q65.5 91 61 91H39Q34.5 91 34 86Z';
+return `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b||a}"/></linearGradient></defs><path d="M58 8L52 62" stroke="#fff" stroke-opacity=".85" stroke-width="3.5" stroke-linecap="round"/><path d="${p}" fill="url(#${id})"/><g fill="#fff" fill-opacity=".26"><rect x="40" y="40" width="12" height="12" rx="2" transform="rotate(12 46 46)"/><rect x="54" y="58" width="11" height="11" rx="2" transform="rotate(-10 59 63)"/><rect x="38" y="66" width="10" height="10" rx="2"/></g><path d="${p}" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>${TOP[t]||''}`};
+const shake=(c,d='#6b3a24')=>`<path d="M62 4L56 58" stroke="#fff" stroke-opacity=".85" stroke-width="3.5" stroke-linecap="round"/><path d="M26 34H74L68 86Q67.5 91 63 91H37Q32.5 91 32 86Z" fill="${c}"/><path d="M40 44v34" stroke="#fff" stroke-opacity=".3" stroke-width="4" stroke-linecap="round"/><path d="M26 34H74L68 86Q67.5 91 63 91H37Q32.5 91 32 86Z" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2"/><path d="M26 36Q26 14 50 14Q74 14 74 36Z" fill="#fbf3e2"/><path d="M32 30q9-8 18 0t18 0" stroke="${d}" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="50" cy="11" r="5" fill="#d33a3a"/>`;
+const tea=(c,spice)=>`<ellipse cx="50" cy="80" rx="31" ry="6" fill="#cdbba3"/><path d="M32 34H68Q68 54 62 68Q58 77 50 77Q42 77 38 68Q32 54 32 34Z" fill="${c}"/><path d="M42 40q-1 14 3 24" stroke="#fff" stroke-opacity=".35" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M32 34H68Q68 54 62 68Q58 77 50 77Q42 77 38 68Q32 54 32 34Z" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.5"/>${spice?'<rect x="58" y="16" width="5" height="42" rx="2.5" fill="#8a4b25" transform="rotate(12 60 36)"/>':''}<g fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2.5" stroke-linecap="round"><path class="st" d="M42 26q-5-6 0-11"/><path class="st" d="M54 26q-5-6 0-11"/></g>`;
+const cake=`<ellipse cx="50" cy="86" rx="38" ry="5" fill="#cdbba3"/><rect x="20" y="54" width="60" height="30" rx="4" fill="#6b3a24"/><rect x="20" y="65" width="60" height="6" fill="#f6e7c4"/><path d="M18 54Q18 40 34 40H66Q82 40 82 54Z" fill="#8a4b2d"/><circle cx="50" cy="34" r="6" fill="#d9304c"/>`;
+const cookie=(c,chip)=>`<ellipse cx="50" cy="86" rx="36" ry="5" fill="#00000030"/><circle cx="50" cy="56" r="31" fill="${c}"/><circle cx="50" cy="56" r="31" fill="none" stroke="#00000022" stroke-width="3"/><g fill="${chip}"><circle cx="38" cy="46" r="4"/><circle cx="58" cy="42" r="3.5"/><circle cx="62" cy="60" r="4"/><circle cx="42" cy="66" r="3.5"/><circle cx="50" cy="54" r="3"/></g>`;
+const pastry=`<ellipse cx="50" cy="86" rx="38" ry="5" fill="#00000030"/><ellipse cx="50" cy="58" rx="36" ry="24" fill="#d9a04a"/><path d="M20 54Q50 38 80 54M22 66Q50 50 78 66M30 76Q50 66 70 76" stroke="#f3c97a" stroke-width="4.5" fill="none" stroke-linecap="round"/><g fill="#fff" fill-opacity=".8"><circle cx="40" cy="48" r="1.8"/><circle cx="58" cy="46" r="1.8"/><circle cx="50" cy="60" r="1.8"/></g>`;
+const ice=`<path d="M34 54L50 94L66 54Z" fill="#d9a04a"/><path d="M40 62L58 62M44 74L56 74M38 54L56 88M62 54L44 88" stroke="#b9782e" stroke-width="1.8"/><circle cx="50" cy="42" r="17" fill="#fbf0d8"/><circle cx="36" cy="50" r="12" fill="#f3a2b8"/><circle cx="64" cy="50" r="12" fill="#7a4a30"/><circle cx="50" cy="36" r="5" fill="#fff" fill-opacity=".5"/>`;
+
+// ---------- منو ----------
+const S=[
+{t:'بار گرم',a:'#e0894a',items:[
+['قهوه ترک',150,cup('#2c180f','#5a3a22',.8)],
+['اسپرسو سینگل',125,cup('#3a2012','#b07a45',.7)],
+['اسپرسو دبل',150,cup('#3a2012','#b07a45',.85)],
+['کاپوچینو',245,cup('#8a5a35','#f3e3c8')],
+['لاته',240,cup('#a8754a','#f6ead0')],
+['موکا',270,cup('#4a2a1a','#7a4a30')],
+['هات چاکلت',255,cup('#3b1f17','#fbf3e2')],
+['آمریکانو',165,cup('#2a170f')],
+['کارامل ماکیاتو',275,cup('#c98a3c','#f6ead0')]]},
+{t:'نوشیدنی سرد',a:'#3fb0a6',items:[
+['موهیتو گیلانی',200,glass('#c9e46a','#9ccf4a','mint')],
+['موهیتو',250,glass('#bfe9c8','#8fd3a3','lime')],
+['شیر موز',280,glass('#f5e7a8','#f0d680')],
+['شیرموز بستنی',320,glass('#f5e7a8','#f0d680','scoop')],
+['آب هویج بستنی',300,glass('#f58a1f','#e8650f','scoop')],
+['آب هویج',200,glass('#f58a1f','#e8650f')],
+['آب پرتقال',260,glass('#ffb02e','#f58a1f','orange')],
+['آب طالبی',170,glass('#ffbb77','#f59b4a')],
+['طالبی بستنی',260,glass('#ffbb77','#f59b4a','scoop')],
+['آیس لاته',255,glass('#f1dcc0','#4a2a1a')],
+['آیس کافی',165,glass('#6b4429','#2c180f')],
+['آفوگاتو',280,cup('#2c180f','#fbf3e2')+TOP.scoop.replace('cy="24"','cy="34"').replace('cx="44" cy="20"','cx="44" cy="30"')],
+['آب میوه‌های روز',320,glass('#e8405e','#ffb02e','berries')]]},
+{t:'شیک',a:'#e57fa6',items:[
+['شیک وانیل',330,shake('#f3e4b8')],
+['شیک شکلات',330,shake('#6b3a24','#3a1f12')],
+['شیک طالبی',330,shake('#f4a860')],
+['شیک موز',330,shake('#f2dc8a')],
+['شیک توت فرنگی',330,shake('#f08aa4','#c42a52')],
+['شیک زعفران',330,shake('#f0b030','#c98a1c')],
+['شیک موز وانیل',330,shake('#f6e7a8')],
+['شیک موز شکلات',330,shake('#8a5a3c','#3a1f12')],
+['معجون مخصوص',450,shake('#b06a8a','#e8405e')]]},
+{t:'چای',a:'#d0603a',items:[
+['چای محلی',50,tea('#a8421c')],
+['چای سبز',80,tea('#c9b34a')],
+['چای ماسالا',150,tea('#b87333',1)]]},
+{t:'دسر',a:'#e0ab4a',items:[
+['کیک روز',270,cake],
+['خوشکار',70,cookie('#d9a04a','#f3c97a')],
+['رشته',50,pastry],
+['کلوچه فومن',65,cookie('#e0b25c','#c98a3c')],
+['کلوچه شکلاتی',60,cookie('#a86a3c','#3a1f12')],
+['بستنی هر اسکوپ',90,ice]]}
+];
+
+const fa=n=>n.toLocaleString('fa-IR');
+const art=it=>it[3]?`<img src="${it[3]}" alt="${it[0]}">`:`<svg viewBox="0 0 100 100" role="img" aria-label="${it[0]}">${it[2]}</svg>`;
+document.getElementById('heroArt').innerHTML=`<svg viewBox="0 0 100 100">${cup('#2c180f','#c98a3c',1.1)}</svg>`;
+
+const tabs=document.getElementById('tabs'),panel=document.getElementById('panel');
+function show(i,scroll){
+  const s=S[i];
+  [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+  panel.style.setProperty('--a',s.a);
+  panel.innerHTML=`<div class="head"><h2>${s.t}</h2><span>قیمت‌ها به هزار تومان</span></div><div class="grid">${s.items.map(it=>`<div class="item"><div class="art">${art(it)}</div><div class="meta"><b>${it[0]}</b><i>${fa(it[1])}</i></div></div>`).join('')}</div>`;
+  panel.classList.remove('in');void panel.offsetWidth;panel.classList.add('in');
+  if(scroll)window.scrollTo({top:Math.max(0,tabs.parentElement.offsetTop-0),behavior:'smooth'});
+}
+S.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.role='tab';b.textContent=s.t;b.style.setProperty('--a',s.a);
+  b.onclick=()=>show(i,window.scrollY>tabs.parentElement.offsetTop);
+  tabs.appendChild(b);
+});
+tabs.style.setProperty('--a','#e0894a');
+show(0,false);
+</script>
+</body>
+</html>
